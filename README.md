@@ -475,6 +475,10 @@ OpenClaw in Cloudflare Sandbox uses multiple authentication layers:
 
 On Windows, Git may check out shell scripts with CRLF line endings instead of LF. This causes `start-openclaw.sh` to fail with exit code 126 inside the Linux container. Ensure your repository uses LF line endings — configure Git with `git config --global core.autocrlf input` or add a `.gitattributes` file with `* text=auto eol=lf`. See [#64](https://github.com/cloudflare/moltworker/issues/64) for details.
 
+## CI
+
+The [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) workflow runs on every pull request and on pushes to `main`. It installs dependencies with `npm ci`, then runs the repository's `lint`, `format:check`, `typecheck`, `test`, and `build` scripts. It uses read-only permissions and cancels superseded runs on the same ref; it does not deploy or require secrets.
+
 ## Links
 
 - [OpenClaw](https://github.com/openclaw/openclaw)
